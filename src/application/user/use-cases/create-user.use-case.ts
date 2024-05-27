@@ -1,7 +1,7 @@
 import { CreateUserDTO } from "../dto/create-user.dto";
 
-export class RegisterUserUseCase {
-  constructor(private readonly userRepository: any) {} // repo service
+export class CreateUserUseCase {
+  constructor(private readonly userRepository: any) {}
 
   async execute(input: CreateUserDTO) {
     return this.userRepository.register(input);
