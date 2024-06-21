@@ -8,4 +8,44 @@ export class PrismaBookRepository implements BookRepository {
       data: input,
     });
   }
+
+  async findByNameOrIsbn(name?: string, isbn?: string): Promise<Book | null> {
+    const book = await prisma.book.findFirst({
+      where: {
+        OR: [{ name }, { isbn }],
+      },
+    });
+
+    if (!book) {
+      return null;
+    }
+
+    return {
+      name: book.name,
+      quantity: book.quantity,
+      author: book.author,
+      gender: book.gender,
+      isbn: book.isbn,
+    };
+  }
+
+  async findByIsbn(isbn: string): Promise<Book | null> {
+    const book = await prisma.book.findFirst({
+      where: {
+        isbn,
+      },
+    });
+
+    if (!book) {
+      return null;
+    }
+
+    return {
+      name: book.name,
+      quantity: book.quantity,
+      author: book.author,
+      gender: book.gender,
+      isbn: book.isbn,
+    };
+  }
 }
