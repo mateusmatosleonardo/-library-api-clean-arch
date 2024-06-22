@@ -6,16 +6,17 @@ Esta é uma aplicação de **gestão de livros de uma biblioteca**.
 
 ### Requisitos funcionais
 
-- [x] o administrador deve poder cadastrar um novo usuário;
+- [ ] o administrador deve poder cadastrar um novo usuário;
 - [ ] o administrador deve poder visualizar todos os usuários;
 - [ ] o administrador deve poder buscar um usuário específico pelo e-email;
-- [ ] o administrador deve poder cadastrar um livro da biblioteca;
+- [x] o administrador deve poder cadastrar um livro da biblioteca;
+- [x] o administrador deve poder visualizar um livro pelo nome ou ISBN;
 - [ ] o administrador deve poder visualizar a lista de registro de empréstimos;
 
 ### Regras de negócio
 
-- [ ] CPF e email devem ser únicos;
-- [ ] ISBN deve ser único;
+- [ ] CPF e email do usuário devem ser únicos;
+- [ ] ISBN do livro deve ser único;
 - [ ] a data de retorno não pode ser menor que a data de saída;
 - [ ] um usuário não pode estar com mais de um livro com o mesmo ISBN ao mesmo tempo;
 - [ ] um usuário pode estar com mais de um livro com ISBN diferentes ao mesmo tempo;
