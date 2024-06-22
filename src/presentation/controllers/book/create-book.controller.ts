@@ -1,9 +1,9 @@
+import { z } from "zod";
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { BookDTO as Book } from "@/application/dto/book/book.dto";
 import { PrismaBookRepository } from "@/infra/db/repositories/prisma-book-repository";
 import { CreateBookUseCase } from "@/application/use-cases/book/create-book.use-case";
 import { FindBookByIsbnUseCase } from "@/application/use-cases/book/find-book-by-isbn.use-case";
-import { z } from "zod";
 
 export async function createBookController(app: FastifyInstance) {
   const bookRepository = new PrismaBookRepository();
