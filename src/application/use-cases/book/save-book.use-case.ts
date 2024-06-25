@@ -1,0 +1,21 @@
+import { BookRepository } from "@/application/interfaces/book-repository.interface";
+
+type Input = {
+  name: string;
+  quantity: number;
+  author: string;
+  gender: string;
+  isbn: string;
+};
+
+type Output = {
+  message: string;
+};
+
+export class SaveBookUseCase {
+  constructor(private readonly bookRepository: BookRepository) {}
+
+  async execute(input: Input): Promise<Output> {
+    return this.bookRepository.save(input);
+  }
+}

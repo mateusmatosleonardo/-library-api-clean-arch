@@ -1,4 +1,4 @@
-import { BookRepository } from "interfaces/book-repository.interface";
+import { BookRepository } from "@/application/interfaces/book-repository.interface";
 
 export class FindBookUseCase {
   constructor(private readonly bookRepository: BookRepository) {}
