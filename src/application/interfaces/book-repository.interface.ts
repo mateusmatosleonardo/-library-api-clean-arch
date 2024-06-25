@@ -1,7 +1,7 @@
-import { BookDTO } from "@/application/dto/book/book.dto";
+import { Book } from "@/application/dto/book/book.dto";
 
 export interface BookRepository {
-  create(input: BookDTO): Promise<{ message: string }>;
-  findByIsbn(isbn: string): Promise<BookDTO | null>;
-  findByNameOrIsbn(name?: string, isbn?: string): Promise<BookDTO | null>;
+  save(book: Book): Promise<any>;
+  findByIsbn(isbn: string): Promise<any | null>;
+  findByNameOrIsbn(name?: string, isbn?: string): Promise<any | null>;
 }
