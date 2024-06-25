@@ -1,9 +1,9 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { PrismaBookRepository } from "infra/db/repositories/prisma-book-repository";
-import { FindBookUseCase } from "application/use-cases/book/find-book.use-case";
+import { BookRepositoryDatabase } from "@/infra/db/repositories/book-repository-database";
+import { FindBookUseCase } from "@/application/use-cases/book/find-book.use-case";
 
 export async function findBookController(app: FastifyInstance) {
-  const bookRepository = new PrismaBookRepository();
+  const bookRepository = new BookRepositoryDatabase();
   const findBookUseCase = new FindBookUseCase(bookRepository);
 
   app.get("/books", async (request: FastifyRequest, reply: FastifyReply) => {
