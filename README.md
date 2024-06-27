@@ -6,8 +6,8 @@ Esta é uma aplicação de **gestão de livros de uma biblioteca**.
 
 ### Requisitos funcionais
 
-- [ ] o administrador deve poder cadastrar um novo usuário;
-- [ ] o administrador deve poder visualizar todos os usuários;
+- [x] o administrador deve poder cadastrar um novo usuário;
+- [x] o administrador deve poder visualizar todos os usuários cadastrados;
 - [ ] o administrador deve poder buscar um usuário específico pelo e-email;
 - [x] o administrador deve poder cadastrar um livro da biblioteca;
 - [x] o administrador deve poder visualizar um livro pelo nome ou ISBN;
