@@ -9,5 +9,5 @@ export type Loan = {
     author: string;
     gender: string;
     isbn: string;
-  };
+  }[];
 };
