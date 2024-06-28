@@ -1,4 +1,4 @@
-import { User } from "@/application/dto/user/user.dto";
+import { User } from "../user/user.dto";
 
 export type Loan = {
   exitDate: Date;
