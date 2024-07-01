@@ -6,5 +6,18 @@ export function parseDateTime(input: string): Date {
     .split(":")
     .map(Number);
 
-  return new Date(year, month - 1, day, hour, minute, second);
+  const localDate = new Date(year, month - 1, day, hour, minute, second);
+
+  const utcDate = new Date(
+    Date.UTC(
+      localDate.getUTCFullYear(),
+      localDate.getUTCMonth(),
+      localDate.getUTCDate(),
+      localDate.getUTCHours(),
+      localDate.getUTCMinutes(),
+      localDate.getUTCSeconds()
+    )
+  );
+
+  return utcDate;
 }
