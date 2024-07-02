@@ -1,10 +1,12 @@
 import { UserRepository } from "@/application/interfaces/user/user-repository.interface";
+import { Loan } from "@/application/dto/loan/loan.dto";
 
 type Output = {
   name: string;
   email: string;
   cpf: string;
   phone: string;
+  loan?: Loan | null;
 };
 
 export class FindUserByCpfUseCase {
