@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { Book } from "@/application/dto/book/book.dto";
 import { BookRepositoryDatabase } from "@/infra/db/repositories/book-repository-database";
 import { SaveBookUseCase } from "@/application/use-cases/book/save-book.use-case";
 import { FindBookByIsbnUseCase } from "@/application/use-cases/book/find-book-by-isbn.use-case";
@@ -23,17 +22,17 @@ export async function saveBookController(app: FastifyInstance) {
     });
 
     try {
-      const input: Book = saveBookSchema.parse(request.body);
+      const input = saveBookSchema.parse(request.body);
 
-      const book = await findBookByIsbnUseCase.execute(input.isbn);
+      const existingBook = await findBookByIsbnUseCase.execute(input.isbn);
 
-      if (book) {
+      if (existingBook) {
         return reply.status(409).send({ message: "Book already exists" });
       }
 
-      await saveBookUseCase.execute(input);
+      const book = await saveBookUseCase.execute(input);
 
-      return reply.status(201).send({ message: "Book created" });
+      return reply.status(201).send(book);
     } catch (error) {
       if (error instanceof z.ZodError) {
         return reply
