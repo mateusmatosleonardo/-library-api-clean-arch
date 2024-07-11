@@ -1,6 +1,7 @@
 import fastify from "fastify";
 import { saveBookController } from "@/presentation/controllers/book/save-book.controller";
 import { findBookController } from "@/presentation/controllers/book/find-book.controller";
+import { deleteBookController } from "@/presentation/controllers/book/delete-book.controller";
 import { saveUserController } from "@/presentation/controllers/user/save-user.controller";
 import { findAllUsersController } from "@/presentation/controllers/user/find-all-users.controller";
 import { saveLoanController } from "@/presentation/controllers/loan/save-loan.controller";
@@ -12,6 +13,7 @@ app.register(findAllUsersController);
 
 app.register(saveBookController);
 app.register(findBookController);
+app.register(deleteBookController);
 
 app.register(saveLoanController);
 
