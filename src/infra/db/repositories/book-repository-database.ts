@@ -63,4 +63,14 @@ export class BookRepositoryDatabase implements BookRepository {
 
     return book;
   }
+
+  async delete(id: string): Promise<{ message: string }> {
+    await prisma.book.delete({
+      where: {
+        id,
+      },
+    });
+
+    return { message: "book deleted successfully" };
+  }
 }
