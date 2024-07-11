@@ -8,11 +8,46 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  email String @unique
-  cpf String @unique
-  name String
-  phone String
+  id          String @id @default(uuid())
+  email       String @unique
+  cpf         String @unique
+  name        String
+  phone       String
+  created_at  DateTime @default(now()) 
+
+  loan Loan?
 
   @@map("users")
 }
+
+model Book {
+  id          String @id @default(uuid())
+  name        String
+  quantity    Int 
+  author      String
+  gender      String
+  isbn        String @unique
+  created_at  DateTime @default(now())
+
+  loan_id    String?
+  loan Loan? @relation(fields: [loan_id], references: [id])
+
+  @@map("books")
+}
+
+model Loan {
+  id          String @id @default(uuid())
+  start_date  DateTime
+  end_date    DateTime
+  created_at  DateTime @default(now())
+
+  user_cpf   String @unique
+
+  user User @relation(fields: [user_cpf], references: [cpf])
+
+  books Book[]
+
+  @@map("loans")
+}
+
+  
