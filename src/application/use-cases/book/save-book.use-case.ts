@@ -8,9 +8,7 @@ type Input = {
   isbn: string;
 };
 
-type Output = {
-  message: string;
-};
+type Output = Input & {};
 
 export class SaveBookUseCase {
   constructor(private readonly bookRepository: BookRepository) {}
