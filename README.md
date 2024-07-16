@@ -6,11 +6,23 @@ Esta é uma aplicação de **gestão de livros de uma biblioteca**.
 
 ### Requisitos funcionais
 
+### Entidade usuário
+
 - [x] o administrador deve poder cadastrar um novo usuário;
+- [x] o administrador deve poder excluir um usuário;
 - [x] o administrador deve poder visualizar todos os usuários cadastrados;
 - [ ] o administrador deve poder buscar um usuário específico pelo e-email;
+
+### Entidade livro
+
 - [x] o administrador deve poder cadastrar um livro da biblioteca;
-- [x] o administrador deve poder visualizar um livro pelo nome ou ISBN;
+- [x] o administrador deve poder excluir um livro;
+- [x] o administrador deve poder visualizar todos os livro da biblioteca;
+- [x] o administrador deve poder buscar um livro pelo nome ou ISBN;
+
+### Entidade empréstimo
+
+- [ ] o administrador deve poder registrar um empréstimo;
 - [ ] o administrador deve poder visualizar a lista de registro de empréstimos;
 
 ### Regras de negócio
