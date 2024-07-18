@@ -13,7 +13,7 @@ model User {
   cpf         String @unique
   name        String
   phone       String
-  created_at  DateTime @default(now()) 
+  created_at  DateTime @default(now())
 
   loan Loan?
 
@@ -23,7 +23,6 @@ model User {
 model Book {
   id          String @id @default(uuid())
   name        String
-  quantity    Int 
   author      String
   gender      String
   isbn        String @unique
