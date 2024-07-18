@@ -2,7 +2,6 @@ import { BookRepository } from "@/application/interfaces/book/book-repository.in
 
 type Input = {
   name: string;
-  quantity: number;
   author: string;
   gender: string;
   isbn: string;
