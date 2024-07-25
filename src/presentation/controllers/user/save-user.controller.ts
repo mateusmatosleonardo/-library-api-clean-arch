@@ -1,15 +1,14 @@
 import { z } from "zod";
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { User } from "@/application/dto/user/user.dto";
 import { SaveUserUseCase } from "@/application/use-cases/user/save-user.use-case";
-import { FindUserByEmail } from "@/application/use-cases/user/find-user-by-email.use-case";
+import { FindUserByEmailUseCase } from "@/application/use-cases/user/find-user-by-email.use-case";
 import { FindUserByCpfUseCase } from "@/application/use-cases/user/find-user-by-cpf.use-case";
 import { UserRepositoryDatabase } from "@/infra/db/repositories/user-repository-database";
 
 export async function saveUserController(app: FastifyInstance) {
   const userRepository = new UserRepositoryDatabase();
   const saveUserUseCase = new SaveUserUseCase(userRepository);
-  const findUserByEmailUseCase = new FindUserByEmail(userRepository);
+  const findUserByEmailUseCase = new FindUserByEmailUseCase(userRepository);
   const findUserByCpfUseCase = new FindUserByCpfUseCase(userRepository);
 
   app.post("/users", async (request: FastifyRequest, reply: FastifyReply) => {
@@ -30,7 +29,7 @@ export async function saveUserController(app: FastifyInstance) {
     });
 
     try {
-      const input: User = saveUserSchema.parse(request.body);
+      const input = saveUserSchema.parse(request.body);
 
       const [email, cpf] = await Promise.all([
         findUserByEmailUseCase.execute(input.email),
