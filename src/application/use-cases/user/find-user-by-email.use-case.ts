@@ -7,7 +7,7 @@ type Output = {
   phone: string;
 };
 
-export class FindUserByEmail {
+export class FindUserByEmailUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
   async execute(email: string): Promise<Output | null> {
