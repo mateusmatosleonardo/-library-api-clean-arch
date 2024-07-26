@@ -1,26 +1,26 @@
-import { prisma } from "../prisma";
-import { parseDateTime } from "@/shared/utils/convert-date";
-import { LoanRepository } from "@/application/interfaces/loan/loan-repository.interface";
-import { CreateLoan } from "@/application/dto/loan/create-loan.dto";
-import { Loan } from "@/application/dto/loan/loan.dto";
+import { prisma } from "../prisma"
+import { parseDateTime } from "@/shared/utils/convert-date"
+import { LoanRepository } from "@/application/interfaces/loan/loan-repository.interface"
+import { CreateLoan } from "@/application/dto/loan/create-loan.dto"
+import { Loan } from "@/application/dto/loan/loan.dto"
 
 export class LoanRepositoryDatabase implements LoanRepository {
   async save({
     userCpf,
     books,
     exitDate,
-    returnDate,
+    returnDate
   }: CreateLoan): Promise<Loan> {
-    const exitDateTime = parseDateTime(String(exitDate));
-    const returnDateTime = parseDateTime(String(returnDate));
+    const exitDateTime = parseDateTime(String(exitDate))
+    const returnDateTime = parseDateTime(String(returnDate))
 
     const findBooks = await prisma.book.findMany({
       where: {
         isbn: {
-          in: books.map((book) => book.isbn),
-        },
-      },
-    });
+          in: books.map((book) => book.isbn)
+        }
+      }
+    })
 
     const loan = await prisma.loan.create({
       data: {
@@ -28,8 +28,8 @@ export class LoanRepositoryDatabase implements LoanRepository {
         exitDate: exitDateTime,
         returnDate: returnDateTime,
         books: {
-          connect: findBooks.map((book) => ({ id: book.id })),
-        },
+          connect: findBooks.map((book) => ({ id: book.id }))
+        }
       },
       select: {
         user: {
@@ -37,8 +37,8 @@ export class LoanRepositoryDatabase implements LoanRepository {
             name: true,
             email: true,
             cpf: true,
-            phone: true,
-          },
+            phone: true
+          }
         },
         exitDate: true,
         returnDate: true,
@@ -47,12 +47,12 @@ export class LoanRepositoryDatabase implements LoanRepository {
             name: true,
             author: true,
             gender: true,
-            isbn: true,
-          },
-        },
-      },
-    });
+            isbn: true
+          }
+        }
+      }
+    })
 
-    return loan;
+    return loan
   }
 }

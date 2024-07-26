@@ -1,13 +1,13 @@
-import { User } from "../user/user.dto";
+import { User } from "../user/user.dto"
 
 export type Loan = {
-  exitDate: Date;
-  returnDate: Date;
-  user: User;
+  exitDate: Date
+  returnDate: Date
+  user: User
   books: {
-    name: string;
-    author: string;
-    gender: string;
-    isbn: string;
-  }[];
-};
+    name: string
+    author: string
+    gender: string
+    isbn: string
+  }[]
+}

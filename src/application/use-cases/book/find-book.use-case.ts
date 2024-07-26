@@ -1,9 +1,9 @@
-import { BookRepository } from "@/application/interfaces/book/book-repository.interface";
+import { BookRepository } from "@/application/interfaces/book/book-repository.interface"
 
 export class FindBookUseCase {
   constructor(private readonly bookRepository: BookRepository) {}
 
   async execute(name?: string, isbn?: string) {
-    return this.bookRepository.findByNameOrIsbn(name, isbn);
+    return this.bookRepository.findByNameOrIsbn(name, isbn)
   }
 }

@@ -5,8 +5,8 @@ export function formatDateTime(dateTime: Date): string {
     year: "numeric",
     hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit",
-  }).format(dateTime);
+    second: "2-digit"
+  }).format(dateTime)
 
-  return formattedDate;
+  return formattedDate
 }

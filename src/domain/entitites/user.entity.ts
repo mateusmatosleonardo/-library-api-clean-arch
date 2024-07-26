@@ -1,75 +1,75 @@
-import { Entity } from "@/shared/entities/entity";
+import { Entity } from "@/shared/entities/entity"
 
 export type UserProps = {
-  name: string;
-  email: string;
-  cpf: string;
-  phone: string;
-};
+  name: string
+  email: string
+  cpf: string
+  phone: string
+}
 
 export class UserEntity extends Entity {
   constructor(public readonly props: UserProps, id?: string) {
-    super(props, id);
+    super(props, id)
   }
 
   getName() {
-    return this.props.name;
+    return this.props.name
   }
 
   getEmail() {
-    return this.props.email;
+    return this.props.email
   }
 
   getCpf() {
-    return this.props.cpf;
+    return this.props.cpf
   }
 
   getPhone() {
-    return this.props.phone;
+    return this.props.phone
   }
 
   private validateEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
   }
 
   private validateCPF(cpf: string): boolean {
-    return cpf.length === 11;
+    return cpf.length === 11
   }
 
   private validatePhone(phone: string): boolean {
-    return phone.length === 11;
+    return phone.length === 11
   }
 
   setName(name: string) {
-    this.props.name = name;
+    this.props.name = name
   }
 
   setEmail(email: string) {
     if (!this.validateEmail(email)) {
-      throw Error("Invalid email format");
+      throw Error("Invalid email format")
     }
-    this.props.email = email;
+    this.props.email = email
   }
 
   setCfp(cpf: string) {
     if (!this.validateCPF(cpf)) {
-      throw Error("Invalid CPF format");
+      throw Error("Invalid CPF format")
     }
-    this.props.cpf = cpf;
+    this.props.cpf = cpf
   }
 
   setPhone(phone: string) {
     if (!this.validatePhone(phone)) {
-      throw new Error("Invalid phone format");
+      throw new Error("Invalid phone format")
     }
-    this.props.phone = phone;
+    this.props.phone = phone
   }
 
   toJSON() {
     return {
       id: this.id,
-      ...this.props,
-    };
+      ...this.props
+    }
   }
 }

@@ -1,48 +1,48 @@
-import { User } from "@/application/dto/user/user.dto";
-import { UserRepository } from "@/application/interfaces/user/user-repository.interface";
-import { prisma } from "../prisma";
+import { User } from "@/application/dto/user/user.dto"
+import { UserRepository } from "@/application/interfaces/user/user-repository.interface"
+import { prisma } from "../prisma"
 
 export class UserRepositoryDatabase implements UserRepository {
   async save(user: User): Promise<{ message: string }> {
     await prisma.user.create({
-      data: user,
-    });
+      data: user
+    })
 
-    return { message: "User created successfully" };
+    return { message: "User created successfully" }
   }
 
   async findByEmail(email: string): Promise<User | null> {
     const user = await prisma.user.findUnique({
       where: {
-        email,
+        email
       },
       include: {
-        loan: true,
-      },
-    });
+        loan: true
+      }
+    })
 
     if (!user) {
-      return null;
+      return null
     }
 
-    return user;
+    return user
   }
 
   async findByCpf(cpf: string): Promise<User | null> {
     const user = await prisma.user.findUnique({
       where: {
-        cpf,
+        cpf
       },
       include: {
-        loan: true,
-      },
-    });
+        loan: true
+      }
+    })
 
     if (!user) {
-      return null;
+      return null
     }
 
-    return user;
+    return user
   }
 
   async findAll(): Promise<User[] | null> {
@@ -51,14 +51,14 @@ export class UserRepositoryDatabase implements UserRepository {
         name: true,
         email: true,
         cpf: true,
-        phone: true,
-      },
-    });
+        phone: true
+      }
+    })
 
     if (!users) {
-      return null;
+      return null
     }
 
-    return users;
+    return users
   }
 }

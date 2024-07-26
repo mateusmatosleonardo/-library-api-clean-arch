@@ -1,12 +1,12 @@
 export function parseDateTime(input: string): Date {
-  const [datePart, timePart] = input.split(" ");
+  const [datePart, timePart] = input.split(" ")
 
-  const [day, month, year] = datePart.split("/").map(Number);
+  const [day, month, year] = datePart.split("/").map(Number)
   const [hour, minute, second] = (timePart || "00:00:00")
     .split(":")
-    .map(Number);
+    .map(Number)
 
-  const localDate = new Date(year, month - 1, day, hour, minute, second);
+  const localDate = new Date(year, month - 1, day, hour, minute, second)
 
   const utcDate = new Date(
     Date.UTC(
@@ -17,7 +17,7 @@ export function parseDateTime(input: string): Date {
       localDate.getUTCMinutes(),
       localDate.getUTCSeconds()
     )
-  );
+  )
 
-  return utcDate;
+  return utcDate
 }

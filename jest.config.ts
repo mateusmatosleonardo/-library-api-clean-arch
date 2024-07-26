@@ -1,7 +1,8 @@
-import { pathsToModuleNameMapper } from "ts-jest";
-
 export default {
   moduleFileExtensions: ["js", "json", "ts"],
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1",
+  },
   testRegex: ".*\\..*spec\\.ts$",
   transform: {
     "^.+\\.(t|j)s$": "ts-jest",

@@ -1,10 +1,10 @@
 export type Isbn = {
-  isbn: string;
-};
+  isbn: string
+}
 
 export type CreateLoan = {
-  exitDate: Date;
-  returnDate: Date;
-  userCpf: string;
-  books: Isbn[];
-};
+  start_date: Date
+  end_date: Date
+  user_cpf: string
+  books: Isbn[]
+}

@@ -1,0 +1,48 @@
+POST http://localhost:3333/users
+Content-Type: application/json
+
+{
+  "name": "Lucas Fonseca",
+  "email": "lucasfoncesa@gmail.com",
+  "cpf": "22233322233",
+  "phone": "88981890344"
+}
+
+###
+GET http://localhost:3333/users/mateus@gmail.com2
+
+### OBTÉM TODOS OS USUÁRIOS CADASTRADOS
+GET http://localhost:3333/users
+
+### 
+POST http://localhost:3333/books
+Content-Type: application/json
+
+{
+  "name": "O poder do hábito",
+  "author": "Charles Duhigg",
+  "gender": "Autoajuda",
+  "isbn": "123-456-012"
+}
+
+### OBTÉM UM LIVRO PELO NOME OU ISBN
+GET http://localhost:3333/books?isbn=9383127323207
+
+### CRIA UM EMPRÉSTIMO
+POST http://localhost:3333/loans
+Content-Type: application/json
+
+{
+  "exitDate": "25/06/2024 17:30:00",
+  "returnDate": "10/06/2024 17:30:30",
+  "userCpf": "11122233346",
+  "books": [
+    {
+      "isbn": "232314324324234"
+    },
+    {
+      "isbn": "4324324324"
+    }
+  ]
+}
+
