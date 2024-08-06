@@ -48,18 +48,14 @@ export async function saveUserController(app: FastifyInstance) {
           return reply.status(409).send({ message: "CPF already exists" })
         }
 
-        await saveUserUseCase.execute(input)
+        const user = await saveUserUseCase.execute(input)
 
-        return reply
-          .status(201)
-          .send({ message: "User created successfully" })
+        return reply.status(201).send({ id: user.id })
       } catch (error) {
         if (error instanceof z.ZodError) {
-          return reply
-            .status(400)
-            .send({
-              message: error.errors.map((err) => err.message).join(", ")
-            })
+          return reply.status(400).send({
+            message: error.errors.map((err) => err.message).join(", ")
+          })
         }
       }
     }

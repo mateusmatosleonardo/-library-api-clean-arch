@@ -8,7 +8,7 @@ type Input = {
 }
 
 type Output = {
-  message: string
+  id: string
 }
 
 export class SaveUserUseCase {

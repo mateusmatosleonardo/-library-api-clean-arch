@@ -3,12 +3,12 @@ import { UserRepository } from "@/application/interfaces/user/user-repository.in
 import { prisma } from "../prisma"
 
 export class UserRepositoryDatabase implements UserRepository {
-  async save(user: User): Promise<{ message: string }> {
-    await prisma.user.create({
-      data: user
+  async save(input: User): Promise<{ id: string }> {
+    const user = await prisma.user.create({
+      data: input
     })
 
-    return { message: "User created successfully" }
+    return { id: user.id }
   }
 
   async findByEmail(email: string): Promise<User | null> {
@@ -48,6 +48,7 @@ export class UserRepositoryDatabase implements UserRepository {
   async findAll(): Promise<User[] | null> {
     const users = await prisma.user.findMany({
       select: {
+        id: true,
         name: true,
         email: true,
         cpf: true,
@@ -60,5 +61,25 @@ export class UserRepositoryDatabase implements UserRepository {
     }
 
     return users
+  }
+
+  async delete(id: string): Promise<{ message: string } | null> {
+    const user = await prisma.user.findUnique({
+      where: {
+        id
+      }
+    })
+
+    if (user) {
+      await prisma.user.delete({
+        where: {
+          id
+        }
+      })
+
+      return { message: "User successfully deleted" }
+    } else {
+      return null
+    }
   }
 }
