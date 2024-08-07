@@ -20,11 +20,9 @@ export async function findAllUsersController(app: FastifyInstance) {
         return reply.status(200).send(users)
       } catch (error) {
         if (error instanceof z.ZodError) {
-          return reply
-            .status(400)
-            .send({
-              message: error.errors.map((err) => err.message).join(", ")
-            })
+          return reply.status(400).send({
+            message: error.errors.map((err) => err.message).join(", ")
+          })
         }
       }
     }

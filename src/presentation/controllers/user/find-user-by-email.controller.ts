@@ -3,7 +3,7 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify"
 import { UserRepositoryDatabase } from "@/infra/db/repositories/user-repository-database"
 import { FindUserByEmailUseCase } from "@/application/use-cases/user/find-user-by-email.use-case"
 
-export async function FindUserByEmailController(app: FastifyInstance) {
+export async function findUserByEmailController(app: FastifyInstance) {
   const userRepository = new UserRepositoryDatabase()
   const findUserByEmailUseCase = new FindUserByEmailUseCase(userRepository)
 
