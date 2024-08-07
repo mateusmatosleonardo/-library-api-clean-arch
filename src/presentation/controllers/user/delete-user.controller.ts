@@ -8,18 +8,19 @@ export async function deleteUserController(app: FastifyInstance) {
   const deleteUserUseCase = new DeleteUserUseCase(userRepository)
 
   app.delete(
-    "/users",
+    "/users/:userId",
     async (request: FastifyRequest, reply: FastifyReply) => {
-      const id = request.body
+      const { userId } = request.params as { userId: string }
 
-      const deleteUserSchema = z.object({
-        id: z.string().uuid().min(1, "Id cannot be empty")
-      })
+      const userIdSchema = z
+        .string()
+        .uuid()
+        .min(1, "E-mail cannot be empty")
 
       try {
-        const input = deleteUserSchema.parse(id)
+        const input = userIdSchema.parse(userId)
 
-        const user = await deleteUserUseCase.execute(input.id)
+        const user = await deleteUserUseCase.execute(input)
 
         if (user) {
           return reply.status(200).send(user)
