@@ -63,6 +63,20 @@ export class UserRepositoryDatabase implements UserRepository {
     return users
   }
 
+  async update(
+    id: string,
+    user: Partial<User & { id: string }>
+  ): Promise<User | null> {
+    const updateUser = await prisma.user.update({
+      data: user,
+      where: {
+        id
+      }
+    })
+
+    return updateUser
+  }
+
   async delete(id: string): Promise<{ message: string } | null> {
     const user = await prisma.user.findUnique({
       where: {
