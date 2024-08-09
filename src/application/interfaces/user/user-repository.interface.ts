@@ -5,5 +5,6 @@ export interface UserRepository {
   findByEmail(email: string): Promise<User | null>
   findByCpf(cpf: string): Promise<User | null>
   findAll(): Promise<User[] | null>
+  update(id: string, user: Partial<User>): Promise<User | null>
   delete(id: string): Promise<{ message: string } | null>
 }
