@@ -7,13 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum AVAILABILITY {
+  AVAILABLE
+  BORROWED
+  RESERVED
+}
+
 model User {
-  id          String @id @default(uuid())
-  email       String @unique
-  cpf         String @unique
-  name        String
-  phone       String
-  created_at  DateTime @default(now())
+  id                String @id @default(uuid())
+  email             String @unique
+  cpf               String @unique
+  name              String
+  phone             String
+  created_at        DateTime @default(now())
 
   loan Loan?
 
@@ -21,12 +27,17 @@ model User {
 }
 
 model Book {
-  id          String @id @default(uuid())
-  name        String
-  author      String
-  gender      String
-  isbn        String @unique
-  created_at  DateTime @default(now())
+  id                String @id @default(uuid())
+  title             String
+  subtitle          String?
+  author            String
+  publisher         String
+  publication_date  String
+  gender            String
+  edition           String
+  availability      AVAILABILITY
+  isbn              String @unique
+  created_at        DateTime @default(now())
 
   loan_id    String?
   loan Loan? @relation(fields: [loan_id], references: [id])
@@ -35,12 +46,12 @@ model Book {
 }
 
 model Loan {
-  id          String @id @default(uuid())
-  start_date  DateTime
-  end_date    DateTime
-  created_at  DateTime @default(now())
+  id                String @id @default(uuid())
+  start_date        DateTime
+  end_date          DateTime
+  created_at        DateTime @default(now())
 
-  user_cpf   String @unique
+  user_cpf          String @unique
 
   user User @relation(fields: [user_cpf], references: [cpf])
 
