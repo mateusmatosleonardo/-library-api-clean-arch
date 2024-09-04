@@ -7,12 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum AVAILABILITY {
-  AVAILABLE
-  BORROWED
-  RESERVED
-}
-
 model User {
   id                String @id @default(uuid())
   email             String @unique
@@ -35,7 +29,7 @@ model Book {
   publication_date  String
   gender            String
   edition           String
-  availability      AVAILABILITY
+  availability      String
   isbn              String @unique
   created_at        DateTime @default(now())
 
