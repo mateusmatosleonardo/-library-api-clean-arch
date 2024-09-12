@@ -2,23 +2,35 @@ import { prisma } from "infra/db/prisma"
 import { BookRepository } from "@/application/interfaces/book/book-repository.interface"
 import { Book } from "@/application/dto/book/book.dto"
 
-type InputBook = Book & {}
-
 const select = {
   id: true,
-  name: true,
+  title: true,
+  subtitle: true,
   author: true,
-  quantity: true,
+  publisher: true,
+  publication_date: true,
   gender: true,
-  isbn: true,
-  created_at: true
+  edition: true,
+  availability: true,
+  isbn: true
 }
 
 export class BookRepositoryDatabase implements BookRepository {
-  async save(input: InputBook): Promise<Book> {
+  async save(input: Book): Promise<Book> {
     const book = await prisma.book.create({
       data: input,
-      select
+      select: {
+        id: true,
+        title: true,
+        subtitle: true,
+        author: true,
+        publisher: true,
+        publication_date: true,
+        gender: true,
+        edition: true,
+        availability: true,
+        isbn: true
+      }
     })
 
     return book
@@ -34,22 +46,19 @@ export class BookRepositoryDatabase implements BookRepository {
     return books
   }
 
-  async findByNameOrIsbn(
-    name?: string,
+  async findByTitleOrIsbn(
+    title?: string,
     isbn?: string
   ): Promise<Book | null> {
-    const book = await prisma.book.findFirst({
-      where: {
-        OR: [{ name }, { isbn }]
-      },
-      select
-    })
-
-    if (!book) {
-      return null
+    if (title || isbn) {
+      return prisma.book.findFirst({
+        where: {
+          OR: [{ title }, { isbn }]
+        },
+        select
+      })
     }
-
-    return book
+    return null
   }
 
   async findByIsbn(isbn: string): Promise<Book | null> {
