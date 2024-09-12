@@ -12,19 +12,44 @@ export async function saveBookController(app: FastifyInstance) {
   app.post(
     "/books",
     async (request: FastifyRequest, reply: FastifyReply) => {
-      const saveBookSchema = z.object({
-        name: z.string().min(1, "Name cannot be empty"),
-        quantity: z
-          .number()
-          .int()
-          .positive("Quantity must be a positive integer"),
-        author: z.string().min(1, "Author cannot be empty"),
-        gender: z.string().min(1, "Gender cannot be empty"),
-        isbn: z.string().min(1, "ISBN cannot be empty")
+      const schema = z.object({
+        title: z.string({
+          required_error: "Title cannot be empty",
+          invalid_type_error: "Name must be a string"
+        }),
+        subtitle: z.string().nullable(),
+        author: z.string({
+          required_error: "Author cannot be empty",
+          invalid_type_error: "Author must be a string"
+        }),
+        publisher: z.string({
+          required_error: "Publisher cannot be empty",
+          invalid_type_error: "Publisher must be a string"
+        }),
+        publication_date: z.coerce.date({
+          required_error: "Publication date cannot be empty",
+          invalid_type_error: "Publication date must be a valid date"
+        }),
+        gender: z.string({
+          required_error: "Gender cannot be empty",
+          invalid_type_error: "Gender must be a string"
+        }),
+        edition: z.string({
+          required_error: "Edition cannot be empty",
+          invalid_type_error: "Edition must be a string"
+        }),
+        availability: z.string({
+          required_error: "Availability cannot be empty",
+          invalid_type_error: "Availability must be a string"
+        }),
+        isbn: z.string({
+          required_error: "ISBN cannot be empty",
+          invalid_type_error: "ISBN must be a string"
+        })
       })
 
       try {
-        const input = saveBookSchema.parse(request.body)
+        const input = schema.parse(request.body)
 
         const existingBook = await findBookByIsbnUseCase.execute(
           input.isbn
@@ -39,11 +64,9 @@ export async function saveBookController(app: FastifyInstance) {
         return reply.status(201).send(book)
       } catch (error) {
         if (error instanceof z.ZodError) {
-          return reply
-            .status(400)
-            .send({
-              message: error.errors.map((err) => err.message).join(", ")
-            })
+          return reply.status(400).send({
+            message: error.errors.map((err) => err.message).join(", ")
+          })
         }
         return reply.status(400).send({ message: "Unable to create book" })
       }
