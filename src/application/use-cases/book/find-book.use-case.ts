@@ -3,7 +3,7 @@ import { BookRepository } from "@/application/interfaces/book/book-repository.in
 export class FindBookUseCase {
   constructor(private readonly bookRepository: BookRepository) {}
 
-  async execute(name?: string, isbn?: string) {
-    return this.bookRepository.findByNameOrIsbn(name, isbn)
+  async execute(title?: string, isbn?: string) {
+    return this.bookRepository.findByTitleOrIsbn(title, isbn)
   }
 }
