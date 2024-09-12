@@ -1,12 +1,7 @@
 import { BookRepository } from "@/application/interfaces/book/book-repository.interface"
+import { Book } from "@/application/dto/book/book.dto"
 
-type Input = {
-  name: string
-  author: string
-  gender: string
-  isbn: string
-}
-
+type Input = Book
 type Output = Input & {}
 
 export class SaveBookUseCase {
